@@ -14,4 +14,29 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("login");
     }
 
+
+    /*
+
+
+    @Controller
+    class {
+
+    @RequestMapping("/welcome")
+    public String welcomePage(){
+
+    return "welcome";
+
+    }
+
+
+
+
+    }
+
+
+
+
+
+     */
+
 }
