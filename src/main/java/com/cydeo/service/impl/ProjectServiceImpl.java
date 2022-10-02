@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl extends AbstractMapService<ProjectDTO, String> implements ProjectService {
 
-
     @Override
     public ProjectDTO save(ProjectDTO project) {
-        if (project.getProjectStatus()==null){
+
+        if (project.getProjectStatus() == null) {
             project.setProjectStatus(Status.OPEN);
         }
 

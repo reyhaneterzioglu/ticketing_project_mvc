@@ -1,16 +1,12 @@
 package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
-import com.cydeo.enums.Status;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
@@ -27,7 +23,7 @@ public class ProjectController {
 
 
         model.addAttribute("project", new ProjectDTO());
-        model.addAttribute("managers", userService.findAll()); //.stream().filter(user -> user.getRole().getId() == 2L).collect(Collectors.toList()));
+        model.addAttribute("managers", userService.findAll().stream().filter(user -> user.getRole().getId() == 2L).collect(Collectors.toList()));
         model.addAttribute("projects", projectService.findAll());
 
         return "project/create";
@@ -35,13 +31,19 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public String insertProject(@ModelAttribute("project") ProjectDTO project){
-
-
-//        project.setProjectStatus(Status.OPEN);
+    public String insertProject(@ModelAttribute("project") ProjectDTO project) {
 
         projectService.save(project);
 
         return "redirect:/project/create";
+    }
+
+    @GetMapping("/delete/{projectCode}")
+    public String deleteProject(@PathVariable("projectCode") String projectCode) {
+
+        projectService.deleteById(projectCode);
+
+        return "redirect:/project/create";
+
     }
 }
