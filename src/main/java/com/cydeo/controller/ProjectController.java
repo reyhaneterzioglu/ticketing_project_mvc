@@ -38,7 +38,7 @@ public class ProjectController {
     public String insertProject(@ModelAttribute("project") ProjectDTO project){
 
 
-        project.setProjectStatus(Status.OPEN);
+//        project.setProjectStatus(Status.OPEN);
 
         projectService.save(project);
 
